@@ -9,7 +9,7 @@ export const RecommendWrapper = styled.div`
 
     > .left {
       padding: 20px;
-      width: 729px;
+      width: 730px;
       border-right: solid #ccc;
     }
 

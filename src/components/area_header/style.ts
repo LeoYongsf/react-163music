@@ -17,6 +17,7 @@ export const RecommendHeaderWrapper = styled.div`
       font-size: 20px;
       font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif;
       margin-right: 20px;
+      font-weight: 500;
     }
 
     .keywords {
