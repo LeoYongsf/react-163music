@@ -1,5 +1,6 @@
 import React, {FC, memo, ReactNode, useEffect} from "react";
 import {
+  fetchArtistListAction,
   fetchBannerDataAction,
   fetchHotRecommendDataAction,
   fetchNewAlbumDataAction,
@@ -11,6 +12,9 @@ import {RecommendWrapper} from '@/page/discover/inner_page/recommend/style'
 import HotRecommend from '@/page/discover/inner_page/recommend/i_components/hot_recommend'
 import NewAlbum from '@/page/discover/inner_page/recommend/i_components/new_album'
 import TopRanking from '@/page/discover/inner_page/recommend/i_components/top_ranking'
+import UserLogin from '@/page/discover/inner_page/recommend/i_components/user_login'
+import ContractArtist from '@/page/discover/inner_page/recommend/i_components/contract_artist'
+import HotStreamer from '@/page/discover/inner_page/recommend/i_components/hot_streamer'
 
 interface IProps {
   children?: ReactNode
@@ -19,13 +23,12 @@ interface IProps {
 const Recommend: FC<IProps> = () => {
   const dispatch = useAppDispatch()
 
-  const Rankingids = [19723756, 3779629, 2884035]
-
   useEffect(() => {
     dispatch(fetchBannerDataAction())
     dispatch(fetchHotRecommendDataAction())
     dispatch(fetchNewAlbumDataAction())
     dispatch(fetchRankingDataAction())
+    dispatch(fetchArtistListAction())
   }, [])
 
   return (
@@ -38,7 +41,9 @@ const Recommend: FC<IProps> = () => {
           <TopRanking/>
         </div>
         <div className="right">
-          right
+          <UserLogin/>
+          <ContractArtist/>
+          <HotStreamer/>
         </div>
       </div>
     </RecommendWrapper>
