@@ -19,6 +19,8 @@ const AppPlayBar: FC<IProps> = () => {
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [isSliding, setIsSliding] = useState(false)
+
+  const [volume,setVolume] =useState(50)
   const [isShowVolume, setIsShowVolume] = useState(false)
   const [isShowPanel, setIsShowPanel] = useState(false)
   const [isShowLyrics, setIsShowLyrics] = useState(true)
@@ -194,7 +196,7 @@ const AppPlayBar: FC<IProps> = () => {
             </div>
             <div className="right sprite_playbar">
               {/*音量控制滑块*/}
-              {isShowVolume && <VolumeControl audioRef={audioRef}/>}
+              {isShowVolume && <VolumeControl audioRef={audioRef} volume={volume} setVolume={setVolume}/>}
               <button className="btn sprite_playbar volume" onClick={handleShowVolume}></button>
               <button className="btn sprite_playbar loop"
                       onClick={handleChangePlayMode}></button>

@@ -4,10 +4,11 @@ import {VlmControlWrapper} from '@/page/player/volume_control/style'
 interface IProps {
   children?: ReactNode
   audioRef: React.RefObject<HTMLAudioElement>
+  volume: number;
+  setVolume: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const VolumeControl: FC<IProps> = ({audioRef}) => {
-  const [volume, setVolume] = useState(50); // 初始音量为 50%
+const VolumeControl: FC<IProps> = ({audioRef,volume,setVolume}) => {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   // 鼠标拖动更新音量

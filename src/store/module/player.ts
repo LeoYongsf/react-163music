@@ -19,7 +19,7 @@ export const fetchCurrentSong = createAsyncThunk<void, number, IState>(
         // 获取歌曲信息
         if (!res.songs.length) return
         const song = res.songs[0]
-        console.log(res)
+        // console.log(res)
         // 传递歌曲参数
         const newPlayList = [...playSongList]
         newPlayList.push(song)
@@ -95,20 +95,14 @@ const initialState: IPlayerState = {
   lyricIndex: -1,
   playSongList: [
     {
-      "name": "APT.",
-      "id": 2637558926,
+      "name": "七月七日晴",
+      "id": 2639816894,
       "pst": 0,
       "t": 0,
       "ar": [
         {
-          "id": 12062255,
-          "name": "ROSÉ",
-          "tns": [],
-          "alias": []
-        },
-        {
-          "id": 178059,
-          "name": "Bruno Mars",
+          "id": 12213291,
+          "name": "张叶蕾",
           "tns": [],
           "alias": []
         }
@@ -122,43 +116,49 @@ const initialState: IPlayerState = {
       "crbt": null,
       "cf": "",
       "al": {
-        "id": 251077657,
-        "name": "APT.",
-        "picUrl": "https://p2.music.126.net/t47xJ6AwOv9qOQ51PZoiPw==/109951170052324935.jpg",
+        "id": 251785770,
+        "name": "七月七日晴",
+        "picUrl": "https://p2.music.126.net/bDJX_fBqjHbc7iofWaqGyQ==/109951170072052546.jpg",
         "tns": [],
-        "pic_str": "109951170052324935",
-        "pic": 109951170052324930
+        "pic_str": "109951170072052546",
+        "pic": 109951170072052540
       },
-      "dt": 169917,
+      "dt": 181791,
       "h": {
         "br": 320000,
         "fid": 0,
-        "size": 6799195,
-        "vd": -65636,
-        "sr": 44100
+        "size": 7273965,
+        "vd": -19513,
+        "sr": 48000
       },
       "m": {
         "br": 192000,
         "fid": 0,
-        "size": 4079534,
-        "vd": -63148,
-        "sr": 44100
+        "size": 4364397,
+        "vd": -16901,
+        "sr": 48000
       },
       "l": {
         "br": 128000,
         "fid": 0,
-        "size": 2719704,
-        "vd": -61704,
-        "sr": 44100
+        "size": 2909613,
+        "vd": -15218,
+        "sr": 48000
       },
       "sq": {
-        "br": 1729587,
+        "br": 875388,
         "fid": 0,
-        "size": 36735859,
-        "vd": -65650,
-        "sr": 44100
+        "size": 19892231,
+        "vd": -19501,
+        "sr": 48000
       },
-      "hr": null,
+      "hr": {
+        "br": 1638392,
+        "fid": 0,
+        "size": 37230626,
+        "vd": -19527,
+        "sr": 48000
+      },
       "a": null,
       "cd": "01",
       "no": 1,
@@ -166,11 +166,24 @@ const initialState: IPlayerState = {
       "ftype": 0,
       "rtUrls": [],
       "djId": 0,
-      "copyright": 1,
+      "copyright": 0,
       "s_id": 0,
-      "mark": 17180139520,
-      "originCoverType": 1,
-      "originSongSimpleData": null,
+      "mark": 17716748288,
+      "originCoverType": 2,
+      "originSongSimpleData": {
+        "songId": 307780,
+        "name": "七月七日晴",
+        "artists": [
+          {
+            "id": 9950,
+            "name": "许慧欣"
+          }
+        ],
+        "albumMeta": {
+          "id": 30564,
+          "name": "万中选一"
+        }
+      },
       "tagPicList": null,
       "resourceState": true,
       "version": 5,
@@ -179,12 +192,12 @@ const initialState: IPlayerState = {
       "awardTags": null,
       "single": 0,
       "noCopyrightRcmd": null,
-      "mst": 9,
-      "cp": 7002,
+      "mv": 0,
       "rtype": 0,
       "rurl": null,
-      "mv": 22633026,
-      "publishTime": 1729180800000
+      "mst": 9,
+      "cp": 0,
+      "publishTime": 0
     },
     {
       "name": "壁上观",
