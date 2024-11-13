@@ -3,7 +3,8 @@ import {RankingItemWrapper} from '@/page/discover/inner_page/recommend/i_compone
 import {getImageSize} from '@/utils/format'
 import {Link} from "react-router-dom";
 import {useAppDispatch} from '@/store'
-import {fetchCurrentSong} from '@/store/module/player'
+import {fetchAndAddSongToPlaylist, fetchCurrentSong} from '@/store/module/player'
+import {message} from 'antd'
 
 interface IProps {
   children?: ReactNode
@@ -18,6 +19,11 @@ const TopRankingItem: FC<IProps> = (props) => {
 
   function handlePlayClick(id: number) {
     dispatch(fetchCurrentSong(id))
+  }
+
+  function handleAddClick(id: number) {
+    dispatch(fetchAndAddSongToPlaylist(id))
+    message.success("添加至播放列表")
   }
 
   return (
@@ -44,7 +50,8 @@ const TopRankingItem: FC<IProps> = (props) => {
                   <div className="operator">
                     <button className="btn2 sprite_02 play"
                             onClick={() => handlePlayClick(item.id)}></button>
-                    <button className="btn2 sprite_icon2 add"></button>
+                    <button className="btn2 sprite_icon2 add"
+                            onClick={() => handleAddClick(item.id)}></button>
                     <button className="btn2 sprite_02 favor"></button>
                   </div>
                 </div>

@@ -1,7 +1,8 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {getSongDetails, getSongLyric} from '@/api/modules/player'
+import {getSongLyric} from '@/api/modules/player'
 import {ILyric, parseLyric} from '@/utils/parse-lyric'
 import {IRootState} from '@/store'
+import {fetchSongInfo} from '@/utils/fetch-song'
 
 
 interface IState {
@@ -10,40 +11,53 @@ interface IState {
 
 export const fetchCurrentSong = createAsyncThunk<void, number, IState>(
   'currentSong',
-  (id, {dispatch, getState}) => {
+  async (id, {dispatch, getState}) => {
     //查看歌曲是否存在于播放列表
     const playSongList = getState().player.playSongList
     const findIndex = playSongList.findIndex((item) => item.id === id)
-    if (findIndex === -1) {
-      getSongDetails(id).then((res) => {
-        // 获取歌曲信息
-        if (!res.songs.length) return
-        const song = res.songs[0]
-        // console.log(res)
+
+    return fetchSongInfo(id).then((song) => {
+      if (findIndex === -1) {
         // 传递歌曲参数
         const newPlayList = [...playSongList]
         newPlayList.push(song)
         dispatch(changeCurrentSongAction(song))
         dispatch(changeSongListAction(newPlayList))
         dispatch(changeSongIndexAction(newPlayList.length - 1))
+      } else {
+        //歌曲已在播放列表中
+        song = playSongList[findIndex]
+        dispatch(changeCurrentSongAction(song))
+        dispatch(changeSongIndexAction(findIndex))
+      }
+
+      getSongLyric(id).then((res) => {
+        //获取歌词数据
+        const lyricString = res.lrc.lyric
+        //歌词转换为对象数组
+        const lyrics = parseLyric(lyricString)
+        dispatch(changeLyricAction(lyrics))
       })
-    } else {//歌曲已在播放列表中
-      const song = playSongList[findIndex]
-      dispatch(changeCurrentSongAction(song))
-      dispatch(changeSongIndexAction(findIndex))
-    }
-
-
-    getSongLyric(id).then((res) => {
-      //获取歌词数据
-      const lyricString = res.lrc.lyric
-      //歌词转换为对象数组
-      const lyrics = parseLyric(lyricString)
-
-      dispatch(changeLyricAction(lyrics))
     })
-  })
+  }
+)
 
+//添加播放列表
+export const fetchAndAddSongToPlaylist = createAsyncThunk<void, number, IState>(
+  'fetchAndAddSongToPlaylist',
+  (id, { dispatch, getState }) => {
+    const playSongList = getState().player.playSongList;
+    const isSongInPlaylist = playSongList.some((song) => song.id === id);
+    if (isSongInPlaylist) return;
+
+    return fetchSongInfo(id).then((song) => {
+      const newPlaylist = [...playSongList, song];
+      dispatch(changeSongListAction(newPlaylist));  // 更新播放列表
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+);
 export const changeMusicAction = createAsyncThunk<void, boolean, IState>(
   'changemusic',
   (isNext, {dispatch, getState}) => {
